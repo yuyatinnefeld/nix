@@ -22,7 +22,9 @@ pkgs.mkShell rec {
     kustomize
     k9s
     istioctl
-    #helm
+    kube-linter
+    (pkgs.wrapHelm pkgs.kubernetes-helm { plugins = [ pkgs.kubernetes-helmPlugins.helm-secrets ]; })
+    # hyperkit -> homebrew install
 
     ###### infrastructure ######
     terraform

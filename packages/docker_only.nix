@@ -18,7 +18,5 @@ pkgs.mkShell rec {
     colima
     docker
     docker-compose
-
-
    ];
 }

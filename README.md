@@ -24,13 +24,13 @@ nix search nixpkgs colima
 To build and run a package:
 ```bash
 # Build the package (creating a file in /nix/store/xxxx-nix-shell.drv which is used for nix-shell)
-nix-build all_packages.nix
+nix-build packages/all.nix
 
 # run the package
-nix-shell all_packages.nix
+nix-shell packages/all.nix
 
 # clean up
-nix-shell --pure all_packages.nix
+nix-shell --pure packages/all.nix
 ```
 
 ## nix-shell
