@@ -10,6 +10,7 @@ sh <(curl -L https://nixos.org/nix/install)
 To clean up the Nix store and free up space, run:
 ```bash
 nix-store --gc
+nix-collect-garbage
 ```
 
 ## Search Packages
@@ -66,8 +67,7 @@ bash: /nix/store/gxi71m2y8x1rl83dpr1g0x9yz3klrcb0-nodejs-20.12.2/bin/npm: No suc
 
 ### Declarative Shell
 ```bash
-vi shell.nix
-nix-shell shell.nix
+nix-shell packages/shell.nix
 ```
 
 ```bash
@@ -100,13 +100,37 @@ nix-repl> data
 nix-repl> :q
 ```
 
-## nix.conf File
 
+## Nix Flake
+
+### Install Home Manager
 ```bash
-# global nix.conf
-$ cat /etc/nix/nix.conf
-build-users-group = nixbld
+nix-channel --add https://github.com/nix-community/home-manager/archive/master.tar.gz home-manager
+nix-channel --add https://github.com/rycee/home-manager/archive/master.tar.gz home-manager
+nix-channel --update
+nix-channel list
+```
 
-# project level nix.conf
-mkdir -p .config/nix && touch .config/nix/nix.conf
+### Create flake.nix
+```bash
+nix flake init
+wrote: /Users/<xxxx>/.config/flake.nix
+```
+
+### Create config file
+```bash
+mkdir -p ~/.config/nix
+echo 'experimental-features = nix-command flakes' >> ~/.config/nix/nix.conf
+```
+
+### Update Flake file
+```bash
+vi /.config/flake.nix
+vi /.config/packages.nix
+```
+
+### Build & Run Flake
+```bash
+nix build
+nix develop
 ```
