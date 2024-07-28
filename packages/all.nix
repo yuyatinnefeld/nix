@@ -11,28 +11,32 @@ pkgs.mkShell rec {
     curl
     wget
     jq
-    inetutils # telnet
+    # inetutils # telnet
 
     ###### programming ######
-    jdk17
+    # jdk17
 
     ###### container ######
-    minikube
+    # minikube
+    # kustomize
+    # kube-linter
+    # openshift
+    # istioctl
+
+    colima
+    docker
+    kind
     kubectl
-    kustomize
     k9s
-    istioctl
-    kube-linter
     (pkgs.wrapHelm pkgs.kubernetes-helm { plugins = [ pkgs.kubernetes-helmPlugins.helm-secrets ]; })
-    # hyperkit -> homebrew install
 
     ###### infrastructure ######
-    terraform
+    #terraform
     vault
 
     ###### cloud provider ######
-    azure-cli
-    #google-cloud-sdk
+    # azure-cli
+    # google-cloud-sdk
 
    ];
 }
